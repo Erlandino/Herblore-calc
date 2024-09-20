@@ -1,3 +1,5 @@
+let apiData; // Variable to hold the data
+
 async function apiCallPrices() {
   try {
     // Api call
@@ -5,6 +7,8 @@ async function apiCallPrices() {
 
     // Handles the data received from api call
     const data = await res.json();
+
+    apiData = data.data; // Save the data
 
     return data.data;
 
@@ -15,21 +19,25 @@ async function apiCallPrices() {
 }
 
 async function update() {
-  const apiCallPriceData = await apiCallPrices();
-  recipeChecker(null, apiCallPriceData);
+  await apiCallPrices();
+  recipeChecker();
 }
 
+let currentRecipe; // Variable for current recipe on screen
+
 // recipe checker
-async function recipeChecker(recipe, recipedData) {
+async function recipeChecker(recipe) {
+  recipe ? (currentRecipe = recipe) : "";
+
   document.getElementById("recipe-container").innerHTML = "";
   document.getElementById("recipeProfit-container").innerHTML = "";
 
-  if (recipe == "superAntifire") {
-    superAntifireCrafting(recipedData);
-  } else if (recipe == "extendedAntiVenom") {
-    extendedAntiVenomCrafting(recipedData);
+  if (currentRecipe == "superAntifire") {
+    superAntifireCrafting();
+  } else if (currentRecipe == "extendedAntiVenom") {
+    extendedAntiVenomCrafting();
   } else {
-    superAntifireCrafting(recipedData);
+    superAntifireCrafting();
   }
 }
 
@@ -41,18 +49,18 @@ function superAntifireCrafting(apiCallData) {
   //   Object made of goods in api call
   const superAntifireRecipe = {
     antifire: {
-      high: apiCallData ? apiCallData[2452].high : 1184,
-      low: apiCallData ? apiCallData[2452].low : 1169,
+      high: apiData ? apiData[2452].high : 1184,
+      low: apiData ? apiData[2452].low : 1169,
       id: "2452",
     },
     superiorDragonBones: {
-      high: apiCallData ? apiCallData[22124].high : 20456,
-      low: apiCallData ? apiCallData[22124].low : 20456,
+      high: apiData ? apiData[22124].high : 20456,
+      low: apiData ? apiData[22124].low : 20456,
       id: "22124",
     },
     superAntifire: {
-      high: apiCallData ? apiCallData[21978].high : 22161,
-      low: apiCallData ? apiCallData[21978].low : 21084,
+      high: apiData ? apiData[21978].high : 22161,
+      low: apiData ? apiData[21978].low : 21084,
       id: "21978",
     },
   };
@@ -80,18 +88,18 @@ function extendedAntiVenomCrafting(apiCallData) {
   //   Object made of goods in api call
   const extendedAntiVenomRecipe = {
     AntiVenom: {
-      high: apiCallData ? apiCallData[12913].high : 13450,
-      low: apiCallData ? apiCallData[12913].low : 13350,
+      high: apiData ? apiData[12913].high : 13450,
+      low: apiData ? apiData[12913].low : 13350,
       id: "2452",
     },
     AraxyteVenomSack: {
-      high: apiCallData ? apiCallData[29784].high : 1735,
-      low: apiCallData ? apiCallData[29784].low : 1622,
+      high: apiData ? apiData[29784].high : 1735,
+      low: apiData ? apiData[29784].low : 1622,
       id: "22124",
     },
     extendedAntiVenom: {
-      high: apiCallData ? apiCallData[29824].high : 21290,
-      low: apiCallData ? apiCallData[29824].low : 20602,
+      high: apiData ? apiData[29824].high : 21290,
+      low: apiData ? apiData[29824].low : 20602,
       id: "21978",
     },
   };
