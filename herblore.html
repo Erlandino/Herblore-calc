@@ -25,7 +25,49 @@
     <div class="main">
       <h1 id="recipe-title">Super Antifire Recipe calc</h1>
       <div id="recipe-container"></div>
-      <div id="recipeProfit-container"></div>
+      <div id="table-container">
+        <table class="styled-table">
+          <tbody>
+            <tr>
+              <td></td>
+              <th colspan="5" class="second-reagent">SuperiorDragonBones</th>
+            </tr>
+            <tr>
+              <th rowspan="4" class="vertical-text first-reagent">Antifire</th>
+              <td></td>
+              <th>High</th>
+              <th>Low</th>
+              <th>High</th>
+              <th>Low</th>
+            </tr>
+            <tr class="test">
+              <th>High</th>
+              <td id="highHighLow"></td>
+              <td id="highLowHigh"></td>
+              <td id="highHighHigh"></td>
+              <td id="highLowLow"></td>
+            </tr>
+            <tr class="test">
+              <th>Low</th>
+              <td id="lowHighLow"></td>
+              <td id="lowLowHigh"></td>
+              <td id="lowHighHigh"></td>
+              <td id="lowLowLow"></td>
+            </tr>
+            <tr>
+              <td></td>
+              <th>Low</th>
+              <th>High</th>
+              <th>High</th>
+              <th>Low</th>
+            </tr>
+            <tr>
+              <td></td>
+              <th colspan="5" class="product">SuperAntifire</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <button id="updateButton" onclick="update()">Click to update the price</button>
     </div>
   </body>
