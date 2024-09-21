@@ -6,6 +6,11 @@
   list-style-type: none;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
 
 /* Navbar */
 .navbar {

@@ -68,10 +68,11 @@ function superAntifireCrafting(apiCallData) {
   // object destructuring for superAntifireRecipe
   const { antifire, superiorDragonBones, superAntifire } = superAntifireRecipe;
 
-  const lowLowHigh = 0.99 * superAntifire.high - (antifire.low + superiorDragonBones.low + 50);
-  const highHighHigh = 0.99 * superAntifire.high - (antifire.high + superiorDragonBones.high + 50);
-  const highHighLow = 0.99 * superAntifire.low - (antifire.high + superiorDragonBones.high + 50);
-  const lowLowlow = 0.99 * superAntifire.low - (antifire.low + superiorDragonBones.low + 50);
+  const lowLowHigh = 0.99 * (superAntifire.high - (antifire.low + superiorDragonBones.low + 50));
+  const highHighHigh =
+    0.99 * (superAntifire.high - (antifire.high + superiorDragonBones.high + 50));
+  const highHighLow = 0.99 * (superAntifire.low - (antifire.high + superiorDragonBones.high + 50));
+  const lowLowlow = 0.99 * (superAntifire.low - (antifire.low + superiorDragonBones.low + 50));
 
   elementCreator(
     [lowLowHigh, highHighHigh, highHighLow, lowLowlow],
@@ -107,10 +108,11 @@ function extendedAntiVenomCrafting(apiCallData) {
   // object destructuring for extendedAntiVenomRecipe
   const { AntiVenom, AraxyteVenomSack, extendedAntiVenom } = extendedAntiVenomRecipe;
 
-  const lowLowHigh = 0.99 * extendedAntiVenom.high - (AntiVenom.low + AraxyteVenomSack.low * 4);
-  const highHighHigh = 0.99 * extendedAntiVenom.high - (AntiVenom.high + AraxyteVenomSack.high * 4);
-  const highHighLow = 0.99 * extendedAntiVenom.low - (AntiVenom.high + AraxyteVenomSack.high * 4);
-  const lowLowlow = 0.99 * extendedAntiVenom.low - (AntiVenom.low + AraxyteVenomSack.low * 4);
+  const lowLowHigh = 0.99 * (extendedAntiVenom.high - (AntiVenom.low + AraxyteVenomSack.low * 4));
+  const highHighHigh =
+    0.99 * (extendedAntiVenom.high - (AntiVenom.high + AraxyteVenomSack.high * 4));
+  const highHighLow = 0.99 * (extendedAntiVenom.low - (AntiVenom.high + AraxyteVenomSack.high * 4));
+  const lowLowlow = 0.99 * (extendedAntiVenom.low - (AntiVenom.low + AraxyteVenomSack.low * 4));
 
   elementCreator(
     [lowLowHigh, highHighHigh, highHighLow, lowLowlow],
