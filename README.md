@@ -19,3 +19,11 @@ Planned features
 - Editing of price value with new calculations
 
 - Improved outlook of site
+
+- Responsive tables
+
+- Up and down arrows to represent price change from previous update
+
+- prices of the reagants in an recipe of an reagent of the final product
+
+- Marging column

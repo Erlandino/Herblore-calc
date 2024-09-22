@@ -3,7 +3,7 @@ let apiData; // Variable to hold the data
 async function apiCallPrices() {
   try {
     // Api call
-    const res = await fetch("https://prices.runescape.wiki/api/v1/osrs/latest");
+    // const res = await fetch("https://prices.runescape.wiki/api/v1/osrs/latest");
 
     // Handles the data received from api call
     const data = await res.json();
@@ -29,8 +29,7 @@ let currentRecipe; // Variable for current recipe on screen
 async function recipeChecker(recipe) {
   recipe ? (currentRecipe = recipe) : "";
 
-  document.getElementById("recipe-container").innerHTML = "";
-  document.getElementById("recipeProfit-container").innerHTML = "";
+  document.querySelector(".static-prices-container").innerHTML = "";
 
   if (currentRecipe == "superAntifire") {
     superAntifireCrafting();
@@ -68,15 +67,28 @@ function superAntifireCrafting(apiCallData) {
   // object destructuring for superAntifireRecipe
   const { antifire, superiorDragonBones, superAntifire } = superAntifireRecipe;
 
-  const lowLowHigh = 0.99 * (superAntifire.high - (antifire.low + superiorDragonBones.low + 50));
+  const highHighLow = 0.99 * (superAntifire.low - (antifire.high + superiorDragonBones.high + 50));
+  const highLowHigh = 0.99 * (superAntifire.high - (antifire.high + superiorDragonBones.low + 50));
   const highHighHigh =
     0.99 * (superAntifire.high - (antifire.high + superiorDragonBones.high + 50));
-  const highHighLow = 0.99 * (superAntifire.low - (antifire.high + superiorDragonBones.high + 50));
+  const highLowLow = 0.99 * (superAntifire.low - (antifire.high + superiorDragonBones.low + 50));
+
+  const lowHighLow = 0.99 * (superAntifire.low - (antifire.low + superiorDragonBones.high + 50));
+  const lowLowHigh = 0.99 * (superAntifire.high - (antifire.low + superiorDragonBones.low + 50));
+  const lowHighHigh = 0.99 * (superAntifire.high - (antifire.low + superiorDragonBones.high + 50));
   const lowLowlow = 0.99 * (superAntifire.low - (antifire.low + superiorDragonBones.low + 50));
 
   elementCreator(
-    [lowLowHigh, highHighHigh, highHighLow, lowLowlow],
-    ["low, low, high", "high, high, high", "high, high, low", "low, low, low"],
+    [
+      { name: "highHighLow", price: highHighLow, color: "" },
+      { name: "highLowHigh", price: highLowHigh, color: "" },
+      { name: "highHighHigh", price: highHighHigh, color: "" },
+      { name: "highLowLow", price: highLowLow, color: "" },
+      { name: "lowHighLow", price: lowHighLow, color: "" },
+      { name: "lowLowHigh", price: lowLowHigh, color: "" },
+      { name: "lowHighHigh", price: lowHighHigh, color: "" },
+      { name: "lowLowLow", price: lowLowlow, color: "" },
+    ],
     superAntifireRecipe
   );
 }
@@ -108,70 +120,117 @@ function extendedAntiVenomCrafting(apiCallData) {
   // object destructuring for extendedAntiVenomRecipe
   const { AntiVenom, AraxyteVenomSack, extendedAntiVenom } = extendedAntiVenomRecipe;
 
-  const lowLowHigh = 0.99 * (extendedAntiVenom.high - (AntiVenom.low + AraxyteVenomSack.low * 4));
+  const highHighLow = 0.99 * (extendedAntiVenom.low - (AntiVenom.high + AraxyteVenomSack.high * 4));
+  const highLowHigh = 0.99 * (extendedAntiVenom.high - (AntiVenom.high + AraxyteVenomSack.low * 4));
   const highHighHigh =
     0.99 * (extendedAntiVenom.high - (AntiVenom.high + AraxyteVenomSack.high * 4));
-  const highHighLow = 0.99 * (extendedAntiVenom.low - (AntiVenom.high + AraxyteVenomSack.high * 4));
+  const highLowLow = 0.99 * (extendedAntiVenom.low - (AntiVenom.high + AraxyteVenomSack.low * 4));
+
+  const lowHighLow = 0.99 * (extendedAntiVenom.low - (AntiVenom.low + AraxyteVenomSack.high * 4));
+  const lowLowHigh = 0.99 * (extendedAntiVenom.high - (AntiVenom.low + AraxyteVenomSack.low * 4));
+  const lowHighHigh = 0.99 * (extendedAntiVenom.high - (AntiVenom.low + AraxyteVenomSack.high * 4));
   const lowLowlow = 0.99 * (extendedAntiVenom.low - (AntiVenom.low + AraxyteVenomSack.low * 4));
 
   elementCreator(
-    [lowLowHigh, highHighHigh, highHighLow, lowLowlow],
-    ["low, low, high", "high, high, high", "high, high, low", "low, low, low"],
+    [
+      { name: "highHighLow", price: highHighLow, color: "" },
+      { name: "highLowHigh", price: highLowHigh, color: "" },
+      { name: "highHighHigh", price: highHighHigh, color: "" },
+      { name: "highLowLow", price: highLowLow, color: "" },
+      { name: "lowHighLow", price: lowHighLow, color: "" },
+      { name: "lowLowHigh", price: lowLowHigh, color: "" },
+      { name: "lowHighHigh", price: lowHighHigh, color: "" },
+      { name: "lowLowLow", price: lowLowlow, color: "" },
+    ],
     extendedAntiVenomRecipe
   );
 }
 
 // creates elements for recipes
-function elementCreator(profit, priceLevel, recipeData) {
+function elementCreator(profit, recipeData) {
   // loops trough recipeData object
-  for (const [key, value] of Object.entries(recipeData)) {
+  for (const [index, [key, value]] of Object.entries(recipeData).entries()) {
     // key = name, value = high price, low price and id for name in api
+
+    const staticTableBody = document.querySelector(".static-prices-container");
 
     // capitalizes first letter for name
     let str = key;
     str = str.charAt(0).toUpperCase() + str.slice(1);
 
-    // container element
-    const container = document.createElement("div");
+    const tr = document.createElement("tr");
+    const th = document.createElement("th");
+    th.innerText = `${str}`;
 
-    //   name element
-    const nameElenent = document.createElement("p");
-    nameElenent.innerText = `${str}`;
+    const tdHigh = document.createElement("td");
+    tdHigh.innerText = `${value.high}`;
 
-    // price element
-    const priceElement = document.createElement("p");
-    priceElement.innerText = `${value.high}`;
+    const tdLow = document.createElement("td");
+    tdLow.innerText = `${value.low}`;
 
-    //  adds elements to their positions
-    nameElenent.classList.add("goodsName");
-    priceElement.classList.add("goodsPrice");
-    container.appendChild(nameElenent);
-    container.appendChild(priceElement);
-    container.classList.add("container");
-    document.getElementById("recipe-container").appendChild(container);
+    tr.appendChild(th);
+    tr.appendChild(tdHigh);
+    tr.appendChild(tdLow);
+    staticTableBody.appendChild(tr);
+
+    switch (index) {
+      case 0:
+        document.querySelector(".first-reagent").innerHTML = str;
+        break;
+      case 1:
+        document.querySelector(".second-reagent").innerHTML = str;
+        break;
+      default:
+        document.querySelector(".product").innerHTML = str;
+    }
+
+    // // container element
+    // const container = document.createElement("div");
+
+    // //   name element
+    // const nameElenent = document.createElement("p");
+    // nameElenent.innerText = `${str}`;
+
+    // // price element
+    // const priceElement = document.createElement("p");
+    // priceElement.innerText = `${value.high}`;
+
+    // //  adds elements to their positions
+    // nameElenent.classList.add("goodsName");
+    // priceElement.classList.add("goodsPrice");
+    // container.appendChild(nameElenent);
+    // container.appendChild(priceElement);
+    // container.classList.add("container");
+    // document.getElementById("recipe-container").appendChild(container);
   }
 
-  // loops trough profit array
-  for (let i = 0; i < profit.length; i++) {
-    // container element
-    const calcContainer = document.createElement("div");
+  profit.sort((a, b) => a.price - b.price);
 
-    // name element
-    const calcText = document.createElement("p");
-    calcText.innerText = `Profit (${priceLevel[i]})`;
+  const minPrice = profit[0].price;
+  const maxPrice = profit[profit.length - 1].price;
 
-    // price element
-    const calcPrice = document.createElement("p");
-    calcPrice.innerText = `${profit[i]}`;
-    calcText.classList.add("goodsName");
-    calcPrice.classList.add("goodsPrice");
+  profit.forEach((item) => {
+    const normalizedPrice = item.price / maxPrice;
 
-    // adds all elements to their positions
-    calcContainer.appendChild(calcText);
-    calcContainer.appendChild(calcPrice);
-    calcContainer.classList.add("container");
-    document.getElementById("recipeProfit-container").appendChild(calcContainer);
-  }
+    console.log(
+      "normalizedPrice: " +
+        normalizedPrice +
+        " item.price: " +
+        item.price +
+        " minPrice: " +
+        minPrice +
+        " maxPrice: " +
+        maxPrice
+    );
+
+    const hue = Math.max(0, normalizedPrice * 120);
+
+    console.log("hue: " + hue);
+
+    item.color = `hsl(${hue}, 100%, 50%)`;
+    document.getElementById(item.name).style.backgroundColor = item.color;
+    document.getElementById(item.name).innerHTML = item.price;
+  });
 }
 
 // updates the calc every hour
