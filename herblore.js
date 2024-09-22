@@ -29,7 +29,7 @@ let currentRecipe; // Variable for current recipe on screen
 async function recipeChecker(recipe) {
   recipe ? (currentRecipe = recipe) : "";
 
-  document.getElementById("recipe-container").innerHTML = "";
+  document.querySelector(".static-prices-container").innerHTML = "";
 
   if (currentRecipe == "superAntifire") {
     superAntifireCrafting();
@@ -152,39 +152,56 @@ function elementCreator(profit, recipeData) {
   for (const [index, [key, value]] of Object.entries(recipeData).entries()) {
     // key = name, value = high price, low price and id for name in api
 
-    switch (index) {
-      case 0:
-        document.querySelector(".first-reagent").innerHTML = key;
-        break;
-      case 1:
-        document.querySelector(".second-reagent").innerHTML = key;
-        break;
-      default:
-        document.querySelector(".product").innerHTML = key;
-    }
+    const staticTableBody = document.querySelector(".static-prices-container");
 
     // capitalizes first letter for name
     let str = key;
     str = str.charAt(0).toUpperCase() + str.slice(1);
 
-    // container element
-    const container = document.createElement("div");
+    const tr = document.createElement("tr");
+    const th = document.createElement("th");
+    th.innerText = `${str}`;
 
-    //   name element
-    const nameElenent = document.createElement("p");
-    nameElenent.innerText = `${str}`;
+    const tdHigh = document.createElement("td");
+    tdHigh.innerText = `${value.high}`;
 
-    // price element
-    const priceElement = document.createElement("p");
-    priceElement.innerText = `${value.high}`;
+    const tdLow = document.createElement("td");
+    tdLow.innerText = `${value.low}`;
 
-    //  adds elements to their positions
-    nameElenent.classList.add("goodsName");
-    priceElement.classList.add("goodsPrice");
-    container.appendChild(nameElenent);
-    container.appendChild(priceElement);
-    container.classList.add("container");
-    document.getElementById("recipe-container").appendChild(container);
+    tr.appendChild(th);
+    tr.appendChild(tdHigh);
+    tr.appendChild(tdLow);
+    staticTableBody.appendChild(tr);
+
+    switch (index) {
+      case 0:
+        document.querySelector(".first-reagent").innerHTML = str;
+        break;
+      case 1:
+        document.querySelector(".second-reagent").innerHTML = str;
+        break;
+      default:
+        document.querySelector(".product").innerHTML = str;
+    }
+
+    // // container element
+    // const container = document.createElement("div");
+
+    // //   name element
+    // const nameElenent = document.createElement("p");
+    // nameElenent.innerText = `${str}`;
+
+    // // price element
+    // const priceElement = document.createElement("p");
+    // priceElement.innerText = `${value.high}`;
+
+    // //  adds elements to their positions
+    // nameElenent.classList.add("goodsName");
+    // priceElement.classList.add("goodsPrice");
+    // container.appendChild(nameElenent);
+    // container.appendChild(priceElement);
+    // container.classList.add("container");
+    // document.getElementById("recipe-container").appendChild(container);
   }
 
   profit.sort((a, b) => a.price - b.price);

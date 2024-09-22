@@ -108,6 +108,18 @@ body {
   border-bottom: 1px solid #dddddd;
 }
 
+th,
+.inner-shell {
+  background-color: rgb(255, 241, 161);
+}
+td {
+  background-color: rgb(161, 255, 255);
+}
+#recipe-container thead th,
+.outer-shell {
+  background-color: rgb(184, 162, 130);
+}
+
 #updateButton {
   background-color: #4caf50;
   border: none;

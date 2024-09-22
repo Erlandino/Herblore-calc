@@ -20,67 +20,10 @@ Planned features
 
 - Improved outlook of site
 
-table notes:
+- Responsive tables
 
-<!--
-<table>
-    <thead>
-        <tr>
-			<td class="hidden-cell"></td>
-            <th colspan="4">Herblore calc</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td class="hidden-cell"></td>
-            <th>High</th>
-            <th>Low</th>
-            <th>High</th>
-            <th>Low</th>
-        </tr>
-      	<tr class="right">
-            <th>High</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-         <tr class="right">
-            <th>Low</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td class="hidden-cell"></td>
-            <th>Low</th>
-            <th>High</th>
-            <th>High</th>
-            <th>Low</th>
-        </tr>
-    </tbody>
-</table>
--->
+- Up and down arrows to represent price change from previous update
 
-// loops trough profit array
-// for (let i = 0; i < priceLevel.length; i++) {
-// // container element
-// const calcContainer = document.createElement("div");
+- prices of the reagants in an recipe of an reagent of the final product
 
-// // name element
-// const calcText = document.createElement("p");
-// calcText.innerText = `Profit (${priceLevel[i]})`;
-
-// // price element
-// const calcPrice = document.createElement("p");
-// calcPrice.innerText = `${profit[i]}`;
-// calcText.classList.add("goodsName");
-// calcPrice.classList.add("goodsPrice");
-
-// // adds all elements to their positions
-// calcContainer.appendChild(calcText);
-// calcContainer.appendChild(calcPrice);
-// calcContainer.classList.add("container");
-// document.getElementById("recipeProfit-container").appendChild(calcContainer);
-// }
+- Marging column
